@@ -1,0 +1,38 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.text-purple {
+  color: #6f42c1;
+}
+
+.bg-purple {
+  background-color: #6f42c1 !important;
+  color: #fff;
+}
+
+.btn-purple {
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+}
+
+.btn-purple:hover {
+  background-color: #5a35a2;
+}
+
+.login-box {
+  max-width: 400px;
+  background-color: #ffffff;
+  border: 2px solid #6f42c1;
+}
+
+.login-wrapper {
+  background: linear-gradient(to right, #ece9f1, #ffffff);
+}
+
+.chat-box .card {
+  box-shadow: 0 0 15px rgba(111, 66, 193, 0.3);
+}

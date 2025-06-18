@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io("https://socket-io-bo8c.onrender.com");
 
 new Vue({
   el: "#app",

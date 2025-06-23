@@ -1,5 +1,5 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #f8f9fa;
   color: #333;
 }
@@ -35,4 +35,13 @@ body {
 
 .chat-box .card {
   box-shadow: 0 0 15px rgba(111, 66, 193, 0.3);
+}
+.message {
+  font-size: 12px;
+  margin-top: 15px;
+}
+.message > span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #6f42c1;
 }

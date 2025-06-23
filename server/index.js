@@ -6,8 +6,13 @@ const io = require("socket.io")(http);
 
 app.use(express.static("public"));
 
-const PORT = 3000;
-const chatRooms = {};
+const PORT = 8000;
+const chatRooms = {
+  password123: {
+    name: "General Chat",
+    users: [],
+  },
+};
 
 function getRoomStats() {
   return Object.entries(chatRooms).map(([password, room]) => ({

@@ -6,11 +6,12 @@ const io = require("socket.io")(http);
 
 app.use(express.static("public"));
 
-const PORT = 8000;
+const PORT = 3000;
 const chatRooms = {
   password123: {
     name: "General Chat",
     users: [],
+    messages: [],
   },
 };
 

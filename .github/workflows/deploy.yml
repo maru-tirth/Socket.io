@@ -20,22 +20,22 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            # Navigate to project folder
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
             cd Socket.io || exit 1
 
             # Reset to latest code from GitHub
             git fetch origin master
             git reset --hard origin/master
 
-            # Stop and remove existing container
+            # Stop and remove container if exists
             sudo docker stop socket-container || true
             sudo docker rm socket-container || true
 
-            # If anything is already using port 3000, stop and remove it
-            sudo docker ps -q --filter "publish=3000" | grep -q . && \
-              sudo docker stop \$(sudo docker ps -q --filter "publish=3000") && \
-              sudo docker rm \$(sudo docker ps -a -q --filter "publish=3000")
+            # Kill anything running on port 3000
+            port_pid=\$(sudo lsof -t -i:3000)
+            if [ ! -z "\$port_pid" ]; then
+              sudo kill -9 \$port_pid
+            fi
 
             # Build and run Docker container
             sudo docker build -t socket .

@@ -5,7 +5,6 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
 app.use(express.static("public"));
-
 const PORT = 3000;
 const chatRooms = {
   password123: {

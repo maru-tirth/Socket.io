@@ -35,31 +35,41 @@
         <div v-else-if="isAdmin" class="container mt-4">
             <h2 class="text-purple mb-4">👑 Admin Dashboard</h2>
             <form @submit.prevent="createRoom" class="row g-3 mb-4">
-                <div class="col-md-4"><input type="text" v-model="newRoomName" placeholder="Chat Room Name"
-                        class="form-control" required></div>
-                <div class="col-md-4"><input type="text" v-model="newRoomPassword" placeholder="Room Password"
-                        class="form-control" required></div>
-                <div class="col-md-4"><button class="btn btn-purple w-100" type="submit">Create Chat Room</button></div>
+                <div class="col-md-3">
+                    <input type="text" v-model="newRoomName" placeholder="Chat Room Name" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" v-model="newRoomPassword" placeholder="Room Password" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="number" v-model="newRoomMaxUsers" placeholder="Max Users (optional)" class="form-control" min="1">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-purple w-100" type="submit">Create Chat Room</button>
+                </div>
             </form>
 
             <h5>Available Chats:</h5>
             <ul class="list-group mb-4">
                 <li class="list-group-item d-flex justify-content-between align-items-center" v-for="room in allRooms"
                     :key="room.password">
-                    <strong>{{ room.name }}</strong>
+                    <div>
+                        <strong>{{ room.name }}</strong>
+                        <span v-if="room.maxUsers" class="badge bg-secondary ms-2">Max: {{ room.maxUsers }}</span>
+                    </div>
                     <span>
                         <code>{{ room.password }}</code>
-                        <button class="btn btn-sm btn-danger ms-3" @click="deleteRoom(room.password)">Delete</button>
+                        <button v-if="!room.isProtected" class="btn btn-sm btn-danger ms-3" @click="deleteRoom(room.password)">Delete</button>
                     </span>
                 </li>
             </ul>
 
             <h5>👥 Active Users in Rooms:</h5>
             <ul class="list-group">
-                <li class="list-group-item" v-for="room in roomStats" :key="room.password">
-                    <strong>{{ room.name }}</strong> — {{ room.userCount }} user(s)
+                <li class="list-group-item" v-for="room in filteredRoomStats" :key="room.password">
+                    <strong>{{ room.name }}</strong> — {{ room.userCount }}{{ room.maxUsers ? '/' + room.maxUsers : '' }} user(s)
                     <ul class="mt-1 ms-3 small">
-                        <li v-for="user in room.userList">{{ user }}</li>
+                        <li v-for="user in room.userList" :key="user">{{ user }}</li>
                     </ul>
                 </li>
             </ul>

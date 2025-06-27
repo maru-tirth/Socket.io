@@ -25,9 +25,8 @@ jobs:
             git fetch origin master
             git reset --hard origin/master
 
-            docker stop socket-container || true
-            docker rm socket-container || true
-
-            docker build -t socket .
-            docker run -d --name socket-container -p 3000:3000 socket
+            sudo docker stop socket-container || true
+            sudo docker rm socket-container || true
+            sudo docker build -t socket .
+            sudo docker run -d --name socket-container -p 3000:3000 socket
           EOF

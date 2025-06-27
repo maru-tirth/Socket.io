@@ -14,6 +14,7 @@ const chatRooms = {
   },
 };
 
+
 function getRoomStats() {
   return Object.entries(chatRooms).map(([password, room]) => ({
     name: room.name,

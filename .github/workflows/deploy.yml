@@ -25,6 +25,6 @@ jobs:
             git pull origin main
             docker stop socket-container || true
             docker rm socket-container || true
-            docker build -t socket-app .
-            docker run -d --name socket-container -p 3000:3000 socket-app
+            docker build -t socket .
+            docker run -d --name socket-container -p 3000:3000 socket
           EOF

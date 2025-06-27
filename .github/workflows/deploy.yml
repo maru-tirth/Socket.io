@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - master
+      - master # or 'main' if that's your default branch
 
 jobs:
   deploy:
@@ -21,8 +21,8 @@ jobs:
       - name: Deploy to EC2 via SSH
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            cd Socket.io
-            git pull origin main
+            cd Socket.io || exit 1
+            git pull origin master    # Change to 'main' if needed
             docker stop socket-container || true
             docker rm socket-container || true
             docker build -t socket .

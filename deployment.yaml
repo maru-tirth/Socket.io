@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: socket-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: socket-app
+  template:
+    metadata:
+      labels:
+        app: socket-app
+    spec:
+      containers:
+      - name: socket-app
+        image: socket-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
